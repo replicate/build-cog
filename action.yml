@@ -29,7 +29,9 @@ runs:
     shell: bash
     run: make cog
 
-  - name: Add Cog to PATH
+  - name: Add Cog to PATH and move binary
     shell: bash
-    run: echo "${{ github.workspace }}" >> $GITHUB_PATH
+    run: |
+      echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
+      mv cog ${{ github.workspace }}/bin/cog
 
