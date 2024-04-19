@@ -26,7 +26,10 @@ runs:
       go-version-file: 'go.mod'
 
   - name: Build Cog
+    shell: bash
     run: make cog
 
   - name: Add Cog to PATH
+    shell: bash
     run: echo "${{ github.workspace }}" >> $GITHUB_PATH
+
