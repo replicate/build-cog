@@ -1,0 +1,32 @@
+name: Build Cog
+description: Compile Cog from source using a specified commitish.
+author: replicate
+branding:
+  icon: settings
+  color: gray-dark
+
+inputs:
+  commitish:
+    description: "The commitish (branch, tag, or commit) of Cog to build from source"
+    required: false
+    default: 'main'
+
+runs:
+  using: "composite"
+  steps:
+  - name: Checkout Cog repository
+    uses: actions/checkout@v4
+    with:
+      repository: 'replicate/cog'
+      fetch-depth: 0
+
+  - name: Install Go
+    uses: actions/setup-go@v5
+    with:
+      go-version-file: 'go.mod'
+
+  - name: Build Cog
+    run: make cog
+
+  - name: Add Cog to PATH
+    run: echo "${{ github.workspace }}" >> $GITHUB_PATH
