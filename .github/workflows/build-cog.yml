@@ -14,12 +14,6 @@ jobs:
         repository: 'replicate/cog'
         fetch-depth: 0
 
-    - name: Where am I
-      run: pwd && ls -al
-
-    - name: Change Directory
-      run: cd cog
-
     - name: Install Go
       uses: actions/setup-go@v5
       with:
