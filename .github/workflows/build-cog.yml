@@ -29,7 +29,7 @@ jobs:
       run: ls -la
 
     - name: Add Cog to PATH
-      run: echo "${{ github.workspace }}/cog" >> $GITHUB_PATH
+      run: echo "${{ github.workspace }}" >> $GITHUB_PATH
 
     - name: Check Cog Version
       run: cog --version
