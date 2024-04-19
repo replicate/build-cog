@@ -1,0 +1,42 @@
+name: Build Cog
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Cog Repository
+      uses: actions/checkout@v3
+      with:
+        repository: 'replicate/cog'
+        fetch-depth: 0
+
+    - name: Change Directory
+      run: cd cog
+
+    - name: Install Go
+      uses: actions/setup-go@v5
+      with:
+        go-version-file: 'cog/go.mod'
+
+    - name: Install Python
+      uses: actions/setup-python@v5
+
+    - name: Build Cog
+      run: make cog
+
+    - name: List Files
+      run: ls -la
+
+    - name: Add Cog to PATH
+      run: echo "${{ github.workspace }}/cog" >> $GITHUB_PATH
+
+    - name: Check Cog Version
+      run: cog --version
+
+    - name: Initialize Cog
+      run: cog init
+
