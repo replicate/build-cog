@@ -26,12 +26,9 @@ runs:
       go-version-file: 'go.mod'
 
   - name: Build Cog
-    shell: bash
     run: make cog
 
-  - name: Add Cog to PATH and move binary
+  - name: Add Cog to PATH
     shell: bash
-    run: |
-      echo "${{ github.workspace }}/bin" >> $GITHUB_PATH
-      mv cog ${{ github.workspace }}/bin/cog
+    run: echo "${{ github.workspace }}" >> $GITHUB_PATH
 
