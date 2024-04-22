@@ -19,6 +19,7 @@ runs:
     with:
       repository: 'replicate/cog'
       fetch-depth: 0
+      path: 'cog-repo'
 
   - name: Install Go
     uses: actions/setup-go@v5
