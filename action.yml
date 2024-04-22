@@ -18,6 +18,7 @@ runs:
     uses: actions/checkout@v4
     with:
       repository: 'replicate/cog'
+      ref: ${{ inputs.commitish }}
       fetch-depth: 0
       path: 'cog-repo'
 
