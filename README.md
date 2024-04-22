@@ -35,3 +35,40 @@ All of the following are examples of valid commitishs:
 - `v0.8.6`: A tag name
 
 This is optional. It defaults to `main`.
+
+## Example workflow
+
+
+```yml
+name: Push model to Replicate
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          docker-images: false
+
+      - name: Checkout my model code
+        uses: actions/checkout@v4
+
+      - name: Build cog binary from source
+        uses: replicate/build-cog@v1
+        with:
+          commitish: main
+
+      - name: Build the model
+        run: cog build
+
+      - name: Push to Replicate
+        run: cog push r8.im/my-username/my-model
+```
